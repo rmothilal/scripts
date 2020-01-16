@@ -224,9 +224,6 @@ lr.on('line', function (line) {
         entry.totalDifferenceWithoutLag = entry.totalDifferenceWithLag - totalLag
         perEntryResponseWithLag.push(entry.totalDifferenceWithLag)
         perEntryResponseWithoutLag.push(entry.totalDifferenceWithoutLag)
-        if (perEntryResponseWithLag.length === 4490) {
-          console.log('max messages reached')
-        }
         if (entry.totalDifferenceWithLag >= 1000) {
           transfersThatTakeLongerThanASecondWithLag++
         }
@@ -311,7 +308,7 @@ lr.on('end', function () {
   console.log('Mean/The average time a transaction takes in millisecond with lag: ' + meanWithLag)
   console.log('Variance in milliseconds with lag: ' + varianceWithLag)
   console.log('Standard deviation in milliseconds with lag: ' + standardDeviationWithLag)
-  console.log('Estimated total difference of all requests in milliseconds with averaged handler lag: ' + (totalTimeWithLag))
+  console.log('Estimated total difference of all requests in milliseconds with lag: ' + (totalTimeWithLag))
   console.log('Number of entries that took longer than a second with lag: ' + transfersThatTakeLongerThanASecondWithLag)
   console.log(`% of entries that took longer than a second with lag: ${(transfersThatTakeLongerThanASecondWithLag / totalTransactions * 100).toFixed(2)}%`)
   console.log(`The longest transaction with lag was: ${longestTransactionWithLag.transferId}`)
@@ -328,7 +325,7 @@ lr.on('end', function () {
   console.log('Mean/The average time a transaction takes in millisecond without lag: ' + meanWithoutLag)
   console.log('Variance in milliseconds without lag: ' + varianceWithoutLag)
   console.log('Standard deviation in milliseconds without lag: ' + standardDeviationWithoutLag)
-  console.log('Estimated total difference of all requests in milliseconds without averaged handler lag: ' + (totalTimeWithoutLag))
+  console.log('Estimated total difference of all requests in milliseconds without lag: ' + (totalTimeWithoutLag))
   console.log('Number of entries that took longer than a second without lag: ' + transfersThatTakeLongerThanASecondWithoutLag)
   console.log(`% of entries that took longer than a second without lag: ${(transfersThatTakeLongerThanASecondWithoutLag / totalTransactions * 100).toFixed(2)}%`)
   console.log(`The longest transaction without lag was: ${longestTransactionWithoutLag.transferId}`)
