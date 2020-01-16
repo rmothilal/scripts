@@ -293,7 +293,6 @@ lr.on('end', function () {
   const sortedPerEntryResponseWithoutLag = perEntryResponseWithoutLag.sort(compareNumbers)
   const shortestResponseWithoutLag = sortedPerEntryResponseWithoutLag[0]
   const longestResponseWithoutLag = sortedPerEntryResponseWithoutLag[perEntryResponseWithoutLag.length - 1]
-  const sortedTimeForSimulatorListWithoutLag = timeOnSimulatorList.sort(compareNumbers)
 
   console.log(`Started processing ${argv.file} at ${beginTime}`)
   console.log('First request: ' + firstLine.timestamp)
@@ -332,9 +331,7 @@ lr.on('end', function () {
   console.log('Estimate of average transactions per second without lag: ' + (totalTransactions / (totalTimeWithoutLag / 1000)))
   console.log(`Total lag time in milliseconds for ${argv.handlers} notification handlers: ${totalLagTime} and average of ${totalLagTime / argv.handlers} per handler`)
   console.log('Average time per transaction taken on lag in milliseconds: ' + (timeLagList.reduce((a, b) => a + b) / timeLagList.length))
-  console.log('Shortest transaction time taken on simulator in milliseconds without lag: ' + sortedTimeForSimulatorListWithoutLag[0])
-  console.log('Longest transaction time taken on simulator in milliseconds without lag: ' + sortedTimeForSimulatorListWithoutLag[timeLagList.length - 1])
-
+  console.log('')
   console.log('Total time that script takes to run in seconds: ' + (new Date().getTime() - beginTime.getTime()) / 1000)
 
 })
