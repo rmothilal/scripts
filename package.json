@@ -1,0 +1,16 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "description": "Load testing scripts to process logs for the core Mojaloop APIs",
+  "main": "loadTestingParserWithMock.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rajiv Mothilal",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "line-by-line": "0.1.6",
+    "lodash": "4.17.15",
+    "node-grok": "2.0.3"
+  }
+}
