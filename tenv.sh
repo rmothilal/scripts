@@ -1,1 +1,1 @@
-export TYPE=mock; export TIME=16h15; export DATE=20200116
+export TYPE=withoutMock; export TIME=12h05; export DATE=20200124

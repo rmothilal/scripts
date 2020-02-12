@@ -163,12 +163,12 @@ lr.on('line', function (line) {
         let prepareMessageEnd
         let commitMessage1Start
         let commitMessage1End
-        let commitMessage2Start
-        let commitMessage2End
+        // let commitMessage2Start
+        // let commitMessage2End
         let putTransfersById1Start
         let putTransfersById1End
-        let putTransfersById2Start
-        let putTransfersById2End
+        // let putTransfersById2Start
+        // let putTransfersById2End
         let value = mapOfSimLogs.get(logLine.uuid)
         for (let singleEntry of value) {
           if (singleEntry.process.includes('ML-Notification::prepare::message - START')) {
@@ -183,22 +183,22 @@ lr.on('line', function (line) {
             commitMessage1Start = singleEntry
           } else if (singleEntry.process.includes('ML-Notification::commit::message1 - END')) {
             commitMessage1End = singleEntry
-          } else if (singleEntry.process.includes('ML-Notification::commit::message2 - START')) {
-            commitMessage2Start = singleEntry
-          } else if (singleEntry.process.includes('ML-Notification::commit::message2 - END')) {
-            commitMessage2End = singleEntry
+          // } else if (singleEntry.process.includes('ML-Notification::commit::message2 - START')) {
+          //   commitMessage2Start = singleEntry
+          // } else if (singleEntry.process.includes('ML-Notification::commit::message2 - END')) {
+          //   commitMessage2End = singleEntry
           } else if (singleEntry.process.includes('Simulator::api::putTransfersById - START')) {
-            if (putTransfersById1Start === undefined) {
+            // if (putTransfersById1Start === undefined) {
               putTransfersById1Start = singleEntry
-            } else {
-              putTransfersById2Start = singleEntry
-            }
+            // } else {
+            //   putTransfersById2Start = singleEntry
+            // }
           } else if (singleEntry.process.includes('Simulator::api::putTransfersById - END')) {
-            if (putTransfersById1End === undefined) {
+            // if (putTransfersById1End === undefined) {
               putTransfersById1End = singleEntry
-            } else {
-              putTransfersById2End = singleEntry
-            }
+            // } else {
+            //   putTransfersById2End = singleEntry
+            // }
           }
         }
         // let prepMessDiff = new Date(prepareMessageEnd.timestamp).getTime() - new Date(prepareMessageStart.timestamp).getTime()
@@ -206,16 +206,16 @@ lr.on('line', function (line) {
         // let commMess2Diff = new Date(commitMessage2End.timestamp).getTime() - new Date(commitMessage2Start.timestamp).getTime()
         let postTransDiff = new Date(postTransfersEnd.timestamp).getTime() - new Date(postTransfersStart.timestamp).getTime()
         let putTrans1Diff = new Date(putTransfersById1End.timestamp).getTime() - new Date(putTransfersById1Start.timestamp).getTime()
-        let putTrans2Diff = new Date(putTransfersById2End.timestamp).getTime() - new Date(putTransfersById2Start.timestamp).getTime()
+        // let putTrans2Diff = new Date(putTransfersById2End.timestamp).getTime() - new Date(putTransfersById2Start.timestamp).getTime()
         let prepMessPostTransLag = new Date(postTransfersStart.timestamp).getTime() - new Date(prepareMessageStart.timestamp).getTime()
         let postTransPrepMessLag = new Date(prepareMessageEnd.timestamp).getTime() - new Date(postTransfersEnd.timestamp).getTime()
         let commMess1PutTrans1Lag = new Date(putTransfersById1Start.timestamp).getTime() - new Date(commitMessage1Start.timestamp).getTime()
         let putTrans1CommMess1Lag = new Date(commitMessage1End.timestamp).getTime() - new Date(putTransfersById1End.timestamp).getTime()
-        let commMess2PutTrans2Lag = new Date(putTransfersById2Start.timestamp).getTime() - new Date(commitMessage2Start.timestamp).getTime()
-        let putTrans2CommMess2Lag = new Date(commitMessage2End.timestamp).getTime() - new Date(putTransfersById2End.timestamp).getTime()
+        // let commMess2PutTrans2Lag = new Date(putTransfersById2Start.timestamp).getTime() - new Date(commitMessage2Start.timestamp).getTime()
+        // let putTrans2CommMess2Lag = new Date(commitMessage2End.timestamp).getTime() - new Date(putTransfersById2End.timestamp).getTime()
 
-        let timeOnSim = postTransDiff + putTrans1Diff + putTrans2Diff
-        let totalLag = prepMessPostTransLag + postTransPrepMessLag + commMess1PutTrans1Lag + putTrans1CommMess1Lag + commMess2PutTrans2Lag + putTrans2CommMess2Lag
+        let timeOnSim = postTransDiff + putTrans1Diff // + putTrans2Diff
+        let totalLag = prepMessPostTransLag + postTransPrepMessLag + commMess1PutTrans1Lag + putTrans1CommMess1Lag // + commMess2PutTrans2Lag + putTrans2CommMess2Lag
         timeOnSimulatorList.push(timeOnSim)
         timeLagList.push(totalLag)
         totalSimTime += timeOnSim
